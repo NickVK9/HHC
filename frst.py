@@ -36,6 +36,8 @@ def huawei():
 
     while True:
         try:
+            a = browser.find_element_by_class_name('game__user-value')
+            print(a.text)
             question = browser.find_element_by_class_name('game__question-text')
             print('Найден элемент ${}$ с данным именем класса'.format(question.text))
             answers = browser.find_elements_by_class_name('game__answer')
@@ -43,9 +45,6 @@ def huawei():
                 print('Нашел ответ ${}$'.format(i.text))
                 Mid.append(i.text)
             print(Mid)
-            a = browser.find_element_by_class_name('game__user-value')
-            print(a.text)
-
 
             if question.text in Ask:
                 print("отвечу сам")
