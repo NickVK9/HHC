@@ -14,12 +14,12 @@ def huawei():
     New_A = []
     scores = [0]
 
-    browser = webdriver.Firefox()
+    browser = webdriver.Firefox() #открывает ссылку в браузере файрфокс
     browser.get('https://quiz.honorcup.ru/app/?id=31514&sign=5ffe6ebb52f21ea4eb18fb1dab50f028')
 
     time.sleep(5)
 
-    try:
+    try: #заходит и начинает викторину
         knopka_srazhats = browser.find_element_by_class_name('about__buttons')
         knopka_srazhats.click()
 
@@ -35,7 +35,7 @@ def huawei():
         knopka_pt.click()
 
         time.sleep(20)
-    except:
+    except: #перезапускает программу
         huawei()
 
     while True:
@@ -43,34 +43,34 @@ def huawei():
             a = browser.find_element_by_class_name('game__user-value')
             print(a.text)
             scores.append(int(a.text) #очки в данном вопросе добавились в список
-            if scores[-1] > scores[-2]:
+            if scores[-1] > scores[-2]: #Сравнение очков, при увеличении добавление в ответы и вопросы новых
                 Ask.append(New_Q[-1])
                 Answ.append(New_A[-1])
             else:
                 print('Был неправильный ответ')
-            question = browser.find_element_by_class_name('game__question-text')
+            question = browser.find_element_by_class_name('game__question-text') #находит вопрос на странице
             print('Найден элемент ${}$ с данным именем класса'.format(question.text))
-            answers = browser.find_elements_by_class_name('game__answer')
+            answers = browser.find_elements_by_class_name('game__answer') #находит ответы на странице
             for i in answers:
                 print('Нашел ответ ${}$'.format(i.text))
                 Mid.append(i.text)
             print(Mid)
-
-            if question.text in Ask:
+ 
+            if question.text in Ask: #проверяет наличие вопроса в ранних списках и при нахождении отвечает заданный ответ
                 print("отвечу сам")
                 ind = Ask.index(question.text)
                 print(Answ[ind])
                 ind2 = Mid.index(Answ[ind])
                 print(ind2)
                 answers[ind2].click()
-            else:
+            else: #отвечает второй ответ и записывает его в списки новых
                 print("Ебану наугад")
                 New_Q.append(question.text) 
                 New_A.append(answers[1].text)
                 answers[1].click()
             Mid.clear()
             time.sleep(30)
-        except:
+        except: #при ошибке перезапускает всю программу заново
             print('Нихера не нашел')
             browser.quit()
             huawei()
