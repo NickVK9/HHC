@@ -42,7 +42,7 @@ def huawei():
         try:
             a = browser.find_element_by_class_name('game__user-value')
             print(a.text)
-            scores.append(int(a.text) #очки в данном вопросе добавились в список
+            scores.append(int(a.text)) #очки в данном вопросе добавились в список
             if scores[-1] > scores[-2]: #Сравнение очков, при увеличении добавление в ответы и вопросы новых
                 Ask.append(New_Q[-1])
                 Answ.append(New_A[-1])
